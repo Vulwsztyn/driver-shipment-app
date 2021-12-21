@@ -3,29 +3,29 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Link
+  Link,
+  useParams
 } from "react-router-dom";
+import Dashboard from "./Dashboard";
+import myAxios from './myAxios'
+import Shipment from './Shipment'
+
 
 export default function App() {
+  const [shipments, setShipments] = React.useState([])
+  async function fetchShipments() {
+    const res = await myAxios.get('/shipments')
+    setShipments(res.data.data)
+  }
+  React.useEffect(() => {
+    fetchShipments()
+  }, [])
   return (
     <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="about" element={<About />} />
-      <Route path="users" element={<Users />} />
+      <Route path="/" element={<Dashboard shipments={shipments}/>} />
+      <Route path="/:id" element={<Shipment shipments={shipments} fetchShipments={fetchShipments}/>} />
     </Routes>
   </BrowserRouter>
   );
-}
-
-function Home() {
-  return <h2>Home</h2>;
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
 }
