@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node-dev ./src/index.ts",
-    "tsc": "tsc"
+    "lint": "./node_modules/eslint/bin/eslint.js src/** --fix"
   },
   "keywords": [],
   "author": "",

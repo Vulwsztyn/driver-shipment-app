@@ -13,4 +13,4 @@ services:
       - 8000:8000
     container_name: shipment_server
     command: >
-      tail -f /dev/null
+      sh -c "npm install && npm start"
