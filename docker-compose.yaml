@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  server:
+    image: node:16-alpine3.11
+    working_dir: /home/app
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - PORT=8000
+    volumes:
+      - ./server:/home/app
+    ports:
+      - 8000:8000
+    container_name: shipment_server
+    command: >
+      tail -f /dev/null
